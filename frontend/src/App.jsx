@@ -13,32 +13,63 @@ import AdminFeatures from "./pages/admin-view/features";
 
 // Shop
 import ShoppingLayout from "./components/shopping-view/Shoppinglayout";
+import ShoppingHome from "./pages/shopping-view/home";
+import ShoppingListing from "./pages/shopping-view/listing";
+import ShoppingAccount from "./pages/shopping-view/account";
+import ShoppingCheckout from "./pages/shopping-view/checkout";
 
 //Page doesnt exist
 import NotFound from "./pages/404";
 
+// Auth component
+import CheckAuth from "./components/common/check-auth";
+
+// Unauth page
+import UnauthPage from "./pages/unauth";
+
 function App() {
+  const isAuthenticated = false;
+  const user = null;
   return (
     <div>
       <Routes>
         {/* Auth */}
-        <Route path="/auth" element={<Authlayout />} >
+        <Route path="/auth" element={
+          <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+            <Authlayout />
+          </CheckAuth>
+          } >
           <Route path="/login" element={<AuthLogin />} />
           <Route path="/register" element={<AuthRegister />} />
         </Route>
         {/* Admin */}
-        <Route path="/admin" element={<AdminLayout />} >
+        <Route path="/admin" element={
+          <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+            <AdminLayout />
+          </CheckAuth>
+          } >
           <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/product" element={<AdminProducts />} />
           <Route path="/orders" element={<AdminOrders />} />
           <Route path="/features" element={<AdminFeatures />} />
         </Route>
         {/* Shop */}
-        <Route path="/shop" element={<ShoppingLayout />} >
+        <Route path="/shop" element={
+          <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+            <ShoppingLayout />
+          </CheckAuth>
+          } >
+        <Route path="/home" element={<ShoppingHome />} />
+        <Route path="/listing" element={<ShoppingListing />} />
+        <Route path="/account" element={<ShoppingAccount />} />
+        <Route path="/checkout" element={<ShoppingCheckout />} />
 
         </Route>
         {/* Page doesnt exist */}
         <Route path="*" element={<NotFound />} />
+
+        <Route path="/unauth-page" element={<UnauthPage />} />
+
       </Routes>
       
     </div>
