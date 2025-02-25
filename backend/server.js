@@ -6,9 +6,15 @@ import cors from 'cors'
 import connectDB from './db/connection.js';
 
 dotenv.config();
+const PORT = process.env.PORT || 5000;
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
 
 app.use(cors({
     origin: ["http://localhost:5173"],
