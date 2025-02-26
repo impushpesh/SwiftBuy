@@ -5,9 +5,9 @@ import { useState } from 'react';
 import {registerFormControls} from '../../config/index.js'
 
 const initialState = {
-  userName: "ram",
-  email: "fdsfsdf",
-  password: "2345",
+  userName: "",
+  email: "",
+  password: "",
 };
 
 function AuthRegister() {
@@ -18,7 +18,7 @@ function AuthRegister() {
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground"> Create Account</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-gray-800"> Create Account</h1>
         <p className="mt-2"> 
           Already have an account?
           <Link
@@ -29,6 +29,13 @@ function AuthRegister() {
           </Link>
         </p>
       </div>
+      <CommonForm
+        formControls={registerFormControls}
+        buttonText={"Sign Up"}
+        formData={formData}
+        setFormData={setFormData}
+        onSubmit={onSubmit}
+      />
     </div>
   )
 }
