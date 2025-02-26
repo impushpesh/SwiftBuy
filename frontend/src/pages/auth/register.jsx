@@ -29,14 +29,6 @@ function AuthRegister() {
           </Link>
         </p>
       </div>
-      <CommonForm
-        formControls={registerFormControls}
-        buttonText={"Register"}
-        onSubmit={onSubmit}
-        formData={formData}
-        setFormData={setFormData}
-      
-      />
     </div>
   )
 }
