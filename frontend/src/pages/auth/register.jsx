@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import CommonForm from '../../components/common/form'
 import { useState } from 'react';
-import { registerFormControls } from "@/config"
+import {registerFormControls} from '../../config/index.js'
 
 const initialState = {
   userName: "ram",
