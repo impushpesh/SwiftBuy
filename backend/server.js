@@ -7,6 +7,7 @@ import connectDB from './db/connection.js';
 
 // Importing routes
 import authRoutes from './routes/auth/auth.routes.js';
+import adminProductRoutes from './routes/admin/product.routes.js';
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -35,6 +36,7 @@ app.use(cors({
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/admin/product', adminProductRoutes);
 
 
 app.listen(PORT, () => {
