@@ -16,7 +16,7 @@ import adminOrderRouter from './routes/admin/order.routes.js';
 import shopProductRoutes from './routes/shop/product.routes.js';
 import shopCartRoutes from './routes/shop/cart.routes.js';
 import shopAddressRoutes from './routes/shop/address.routes.js';
-
+import shopSearchRoutes from './routes/shop/search.routes.js';
 
 
 dotenv.config();
@@ -55,6 +55,7 @@ app.use('/api/admin/order', adminOrderRouter);
 app.use('/api/shop/product', shopProductRoutes);
 app.use('/api/shop/cart', shopCartRoutes);
 app.use('/api/shop/address', shopAddressRoutes);
+app.use('/api/shop/search', shopSearchRoutes);
 
 
 
