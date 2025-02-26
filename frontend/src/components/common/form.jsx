@@ -7,16 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
-
-const types = {
-  INPUT: 'input',
-  LABEL: 'label',
-  SELECT: 'select',
-  TEXTAREA: 'textarea',
-}
 
 function CommonForm({
   formControls,
@@ -24,14 +16,13 @@ function CommonForm({
   setFormData,
   onSubmit,
   buttonText,
-  isBtnDisabled,
 }) {
   function renderInputsByComponentType(getControlItem) {
     let element = null;
     const value = formData[getControlItem.name] || "";
 
     switch (getControlItem.componentType) {
-      case types.INPUT:
+      case "input":
         element = (
           <Input
             name={getControlItem.name}
@@ -49,7 +40,7 @@ function CommonForm({
         );
 
         break;
-      case types.SELECT:
+      case "select":
         element = (
           <Select
             onValueChange={(value) =>
@@ -76,7 +67,7 @@ function CommonForm({
         );
 
         break;
-      case types.TEXTAREA:
+      case "textarea":
         element = (
           <Textarea
             name={getControlItem.name}
@@ -126,11 +117,11 @@ function CommonForm({
           </div>
         ))}
       </div>
-      <Button disabled={isBtnDisabled} type="submit" className="mt-2 w-full">
+      <Button  type="submit" className="mt-2 w-full">
         {buttonText || "Submit"}
       </Button>
     </form>
   );
 }
 
-export default CommonForm
+export default CommonForm;

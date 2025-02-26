@@ -31,7 +31,7 @@ function App() {
   const isAuthenticated = false;
   const user = null;
   return (
-    <div>
+    <div className="flex flex-col overflow-hidden bg-white">
       <Routes>
         {/* Auth */}
         <Route path="/auth" element={
@@ -39,8 +39,8 @@ function App() {
             <Authlayout />
           </CheckAuth>
           } >
-          <Route path="/login" element={<AuthLogin />} />
-          <Route path="/register" element={<AuthRegister />} />
+          <Route path="login" element={<AuthLogin />} />
+          <Route path="register" element={<AuthRegister />} />
         </Route>
         {/* Admin */}
         <Route path="/admin" element={
@@ -48,10 +48,10 @@ function App() {
             <AdminLayout />
           </CheckAuth>
           } >
-          <Route path="/dashboard" element={<AdminDashboard />} />
-          <Route path="/product" element={<AdminProducts />} />
-          <Route path="/orders" element={<AdminOrders />} />
-          <Route path="/features" element={<AdminFeatures />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="product" element={<AdminProducts />} />
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="features" element={<AdminFeatures />} />
         </Route>
         {/* Shop */}
         <Route path="/shop" element={
@@ -59,10 +59,10 @@ function App() {
             <ShoppingLayout />
           </CheckAuth>
           } >
-        <Route path="/home" element={<ShoppingHome />} />
-        <Route path="/listing" element={<ShoppingListing />} />
-        <Route path="/account" element={<ShoppingAccount />} />
-        <Route path="/checkout" element={<ShoppingCheckout />} />
+        <Route path="home" element={<ShoppingHome />} />
+        <Route path="listing" element={<ShoppingListing />} />
+        <Route path="account" element={<ShoppingAccount />} />
+        <Route path="checkout" element={<ShoppingCheckout />} />
 
         </Route>
         {/* Page doesnt exist */}
