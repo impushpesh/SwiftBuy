@@ -1,6 +1,7 @@
-import { generateTokenAndSetCookie } from "../../lib/utils/generateToken.js";
+//import { generateTokenAndSetCookie } from "../../lib/utils/generateToken.js";
 import { User } from "../../models/user.model.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 // Register
 const signUp = async (req, res) => {
@@ -38,7 +39,6 @@ const signUp = async (req, res) => {
       return res.status(400).json({success: false, message: "Error creating user" });
     }
     if (newUser) {
-      generateTokenAndSetCookie(newUser._id, res);
       await newUser.save();
 
       return res.status(201).json({success: true, message: "User created successfully" });
@@ -63,8 +63,25 @@ const signIn = async (req, res) => {
       return res.status(400).json({success: false, message: "Invalid credentials" });
     }
 
-    const token = generateTokenAndSetCookie(user._id, res);
-    res.status(200).json({success: true, message: "User signed in successfully", token, data: user  });
+    const token = jwt.sign({
+      id: user._id,
+      email: user.email,
+      username: user.username,
+      role: user.role,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: "1d"}
+    )
+    res.cookie("token", token, { httpOnly: true, secure: false }).json({
+      success: true,
+      message: "Logged in successfully",
+      user: {
+        id: user._id,
+        email: user.email,
+        username: user.username,
+        role: user.role,
+      }
+    })
   } catch (error) {
     console.log("Error in login controller", error.message);
     res.status(500).json({success: false, error: "Internal Server Error. Please try again" });
@@ -92,7 +109,7 @@ const authMiddleware = async (req, res, next) => {
     });
 
   try {
-    const decoded = jwt.verify(token, "CLIENT_SECRET_KEY");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {

@@ -20,8 +20,11 @@ function AuthRegister() {
 
   function onSubmit(event) {
     event.preventDefault();
-    dispatch(registerUser(formData)).unwrap().then(() => {
-        navigate("/auth/login");
+    dispatch(registerUser(formData)).then((data) => {
+        console.log(data)
+        if (data?.payload?.success) {
+          navigate("/auth/login");
+        } 
     }).catch((error) => {
       console.error("Registration Error:", error);
     });

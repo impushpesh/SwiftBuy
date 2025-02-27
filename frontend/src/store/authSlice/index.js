@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 
 const initialState = {
   isAuthenticated: false,
-  isLoading: false,
+  isLoading: true,
   user: null,
 };
 
