@@ -1,4 +1,6 @@
 import { Route,Routes  } from "react-router-dom";
+import { Toaster } from 'react-hot-toast';
+
 // Auth
 import Authlayout from "./components/auth/Authlayout";
 import AuthLogin from "./pages/auth/login";
@@ -71,6 +73,7 @@ function App() {
         <Route path="/unauth-page" element={<UnauthPage />} />
 
       </Routes>
+      <Toaster />
       
     </div>
   );

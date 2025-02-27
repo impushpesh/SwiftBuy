@@ -6,7 +6,14 @@ import bcrypt from "bcryptjs";
 const signUp = async (req, res) => {
   try {
     const { username, email, password } = req.body;
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: "All fields are mandatory" });
+    }
 
+    if (username === null || username === undefined) {
+      return res.status(400).json({ message: "Invalid username" });
+    }
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({ message: "Invalid email" });
@@ -57,7 +64,7 @@ const signIn = async (req, res) => {
     }
 
     const token = generateTokenAndSetCookie(user._id, res);
-    res.status(200).json({ message: "User signed in successfully", token });
+    res.status(200).json({ message: "User signed in successfully", token, user: { role: user.role }  });
   } catch (error) {
     console.log("Error in login controller", error.message);
     res.status(500).json({ error: "Internal Server Error. Please try again" });

@@ -1,8 +1,10 @@
-import React from 'react'
-import { Link } from "react-router-dom";
-import CommonForm from '../../components/common/form'
-import { useState } from 'react';
-import {loginFormControls} from '../../config/index.js'
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import CommonForm from "../../components/common/form";
+import { useState } from "react";
+import { loginFormControls } from "../../config/index.js";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../store/authSlice/index.js";
 
 const initialState = {
   email: "",
@@ -11,14 +13,43 @@ const initialState = {
 
 function AuthLogin() {
   const [formData, setFormData] = useState(initialState);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+
   function onSubmit(event) {
     event.preventDefault();
+    dispatch(loginUser(formData))
+      .unwrap()
+      .then(() => {
+        if (user?.role === "admin") {
+          navigate("/admin/dashboard");
+        } else if (user?.role === "user") {
+          navigate("/shop/home");
+        }
+      })
+      .catch((error) => {
+        console.error("Login Error:", error);
+      });
   }
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (user?.role === "admin") {
+        navigate("/admin/dashboard");
+      } else if (user?.role === "user") {
+        navigate("/shop/home");
+      }
+    }
+  }, [isAuthenticated, user, navigate]);
+
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-800"> Login</h1>
-        <p className="mt-2"> 
+        <h1 className="text-3xl font-bold tracking-tight text-gray-800">
+          Login
+        </h1>
+        <p className="mt-2">
           Don't have an account?
           <Link
             className="font-medium ml-2 text-primary hover:underline"
@@ -30,13 +61,13 @@ function AuthLogin() {
       </div>
       <CommonForm
         formControls={loginFormControls}
-        buttonText={"Sign Up"}
+        buttonText={"Login"}
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}
       />
     </div>
-  )
+  );
 }
 
-export default AuthLogin
+export default AuthLogin;
