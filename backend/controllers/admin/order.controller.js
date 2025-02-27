@@ -5,12 +5,12 @@ const getAllOrdersOfAllUsers = async (req, res) => {
   try {
     const orders = await Order.find({});
     if (!orders.length) {
-      return res.status(404).json({ message: "No orders found" });
+      return res.status(404).json({success: false, message: "No orders found" });
     }
-    return res.status(200).json(orders);
+    return res.status(200).json({success: true, data: orders});
   } catch (error) {
     console.log("Error in getting order", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 
@@ -20,12 +20,12 @@ const getOrderDetailsForAdmin = async (req, res) => {
     const { id } = req.params;
     const order = await Order.findById(id);
     if (!order) {
-      return res.status(404).json({ message: "No order found" });
+      return res.status(404).json({success: false, message: "No order found" });
     }
-    return res.status(200).json(order);
+    return res.status(200).json({success: true, data: orders});
   } catch (error) {
     console.log("Error in getting order", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 
@@ -38,16 +38,16 @@ const updateOrderStatus = async (req, res) => {
     const order = await Order.findById(id);
 
     if (!order) {
-      return res.status(404).json({ message: "No order found" });
+      return res.status(404).json({success: false, message: "No order found" });
     }
 
     await Order.findByIdAndUpdate(id, { orderStatus });
     return res
       .status(200)
-      .json({ message: "Order status updated successfully" });
+      .json({success: true, message: "Order status updated successfully" });
   } catch (error) {
     console.log("Error in updating order status", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 

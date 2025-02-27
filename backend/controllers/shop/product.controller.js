@@ -7,13 +7,13 @@ const getProductDetails = async (req, res) => {
     const product = await Product.findById(id);
 
     if (!product) {
-      return res.status(404).json({ message: "Product not found" });
+      return res.status(404).json({success: false, message: "Product not found" });
     }
 
-    return res.status(200).json(product);
+    return res.status(200).json({success: true, data: product});
   } catch (error) {
     console.log("Error in getProductDetails", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 
@@ -57,10 +57,10 @@ const getFilteredProducts = async (req, res) => {
     }
 
     const products = await Product.find(filters).sort(sort);
-    return res.status(200).json(products);
+    return res.status(200).json({success: true, data: products});
   } catch (error) {
     console.log("Error in getFilteredProducts", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 

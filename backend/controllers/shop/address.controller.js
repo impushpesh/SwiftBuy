@@ -5,7 +5,7 @@ const addAddress = async (req, res) => {
   try {
     const { userId, address, city, pincode, phone, notes } = req.body;
     if (!userId || !address || !city || !pincode || !phone) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({success: false, message: "All fields are required" });
     }
     const newAddress = new Address({
       userId,
@@ -19,10 +19,10 @@ const addAddress = async (req, res) => {
 
     return res
       .status(201)
-      .json({ message: "Address added successfully", newAddress });
+      .json({ success: true, message: "Address added successfully", data: newAddress });
   } catch (error) {
     console.log("Error in adding address", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 
@@ -33,7 +33,7 @@ const updateAddress = async (req, res) => {
     const formData = req.body;
 
     if (!userId || !addressId) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({success: false, message: "All fields are required" });
     }
 
     const address = await Address.findOneAndUpdate(
@@ -47,15 +47,15 @@ const updateAddress = async (req, res) => {
     );
 
     if (!address) {
-      return res.status(404).json({ message: "Address not found" });
+      return res.status(404).json({success: false, message: "Address not found" });
     }
 
     return res
       .status(200)
-      .json({ message: "Address updated successfully", address });
+      .json({success: true, message: "Address updated successfully", data: address });
   } catch (error) {
     console.log("Error in updating address", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 
@@ -65,7 +65,7 @@ const deleteAddress = async (req, res) => {
     const { userId, addressId } = req.params;
 
     if (!userId || !addressId) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({success: false, message: "All fields are required" });
     }
 
     const address = await Address.findOneAndDelete({
@@ -74,15 +74,15 @@ const deleteAddress = async (req, res) => {
     });
 
     if (!address) {
-      return res.status(404).json({ message: "Address not found" });
+      return res.status(404).json({success: false, message: "Address not found" });
     }
 
     return res
       .status(200)
-      .json({ message: "Address deleted successfully", address });
+      .json({success: true, message: "Address deleted successfully" });
   } catch (error) {
     console.log("Error in deleting address", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 
@@ -91,16 +91,16 @@ const fetchAddresses = async (req, res) => {
   try {
     const { userId } = req.params;
     if (!userId) {
-      return res.status(400).json({ message: "User ID is required" });
+      return res.status(400).json({success: false, message: "User ID is required" });
     }
     const addresses = await Address.find({ userId });
     if (!addresses) {
-      return res.status(404).json({ message: "No addresses found" });
+      return res.status(404).json({success: false, message: "No addresses found" });
     }
-    return res.status(200).json({ addresses });
+    return res.status(200).json({success: true, data: addresses });
   } catch (error) {
     console.log("Error in fetching addresses", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 

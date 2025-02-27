@@ -8,16 +8,16 @@ const addReview = async (req, res) => {
     const { productId, userId, userName, reviewMessage, reviewValue } =
       req.body;
     if (!productId || !userId || !userName || !reviewMessage || !reviewValue) {
-      return res.status(400).json({ message: "Please fill all fields" });
+      return res.status(400).json({success: false, message: "Please fill all fields" });
     }
     const order = await Order.findOne({
       userId,
       "cartItems.productId": productId,
     });
     if (!order) {
-      return res.status(400).json({ message: "You can't review this product" });
+      return res.status(400).json({success: false, message: "You can't review this product" });
     }
-    const checkExistinfReview = await ProductReview.findOne({
+    const checkExistinfReview = await Review.findOne({
       productId,
       userId,
     });
@@ -25,7 +25,7 @@ const addReview = async (req, res) => {
     if (checkExistinfReview) {
       return res
         .status(400)
-        .json({ message: "You already reviewed this product" });
+        .json({success: false, message: "You already reviewed this product" });
     }
 
     const newReview = new Review({
@@ -46,10 +46,10 @@ const addReview = async (req, res) => {
     await Product.findByIdAndUpdate(productId, { averageReview });
     return res
       .status(201)
-      .json({ message: "Review added successfully", newReview });
+      .json({success: true, message: "Review added successfully",data: newReview });
   } catch (error) {
     console.log("Error in adding review", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 
@@ -60,12 +60,12 @@ const getProductReviews = async (req, res) => {
 
     const reviews = await Review.find({ productId });
     if (!reviews) {
-      return res.status(400).json({ message: "No reviews found" });
+      return res.status(400).json({success: false, message: "No reviews found" });
     }
-    return res.status(200).json({ reviews });
+    return res.status(200).json({success: true, data: reviews });
   } catch (error) {
     console.log("Error in getting reviews", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 

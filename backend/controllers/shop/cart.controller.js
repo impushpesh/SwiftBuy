@@ -7,13 +7,13 @@ const addToCart = async (req, res) => {
     const { userId, productId, quantity } = req.body;
 
     if (!userId || !productId || quantity <= 0) {
-      return res.status(400).json({ message: "Invalid data" });
+      return res.status(400).json({success: false, message: "Invalid data" });
     }
 
     const product = await Product.findById(productId);
 
     if (!product) {
-      return res.status(404).json({ message: "Product not found" });
+      return res.status(404).json({success: false, message: "Product not found" });
     }
 
     let cart = await Cart.findOne({ userId });
@@ -31,10 +31,10 @@ const addToCart = async (req, res) => {
     }
 
     await cart.save();
-    return res.status(201).json({ message: "Product added to cart", cart });
+    return res.status(201).json({success: true, message: "Product added to cart", data: cart });
   } catch (error) {
     console.log("Error in adding to cart", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 
@@ -43,7 +43,7 @@ const fetchCartItems = async (req, res) => {
   try {
     const { userId } = req.params;
     if (!userId) {
-      return res.status(400).json({ message: "Invalid data" });
+      return res.status(400).json({success: false, message: "Invalid data" });
     }
 
     const cart = await Cart.findOne({ userId }).populate({
@@ -52,7 +52,7 @@ const fetchCartItems = async (req, res) => {
     });
 
     if (!cart) {
-      return res.status(404).json({ message: "Cart is empty" });
+      return res.status(404).json({success: false, message: "Cart is empty" });
     }
 
     const validItems = cart.items.filter(
@@ -76,7 +76,7 @@ const fetchCartItems = async (req, res) => {
     return res.status(200).json({ ...cart._doc, items: populateCartItems });
   } catch (error) {
     console.log("Error in fetching cart items", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 
@@ -137,7 +137,7 @@ const updateCartItemQty = async (req, res) => {
     });
   } catch (error) {
     console.log("Error in updating cart", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 
@@ -193,7 +193,7 @@ const deleteCartItem = async (req, res) => {
     });
   } catch (error) {
     console.log("Error in deleting item", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 

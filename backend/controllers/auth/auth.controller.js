@@ -7,27 +7,27 @@ const signUp = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
-      return res.status(400).json({ message: "All fields are mandatory" });
+      return res.status(400).json({success: false, message: "All fields are mandatory" });
     }
 
     if (username === null || username === undefined) {
-      return res.status(400).json({ message: "Invalid username" });
+      return res.status(400).json({success: false, message: "Invalid username" });
     }
     
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return res.status(400).json({ message: "Invalid email" });
+      return res.status(400).json({success: false, message: "Invalid email" });
     }
 
     if (password.length < 6) {
       return res
         .status(400)
-        .json({ message: "Password must be atleast 6 characters" });
+        .json({success: false, message: "Password must be atleast 6 characters" });
     }
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({success: false, message: "User already exists" });
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -35,17 +35,17 @@ const signUp = async (req, res) => {
 
     const newUser = new User({ username, email, password: hashedPassword });
     if (!newUser) {
-      return res.status(400).json({ message: "Error creating user" });
+      return res.status(400).json({success: false, message: "Error creating user" });
     }
     if (newUser) {
       generateTokenAndSetCookie(newUser._id, res);
       await newUser.save();
 
-      return res.status(201).json({ message: "User created successfully" });
+      return res.status(201).json({success: true, message: "User created successfully" });
     }
   } catch (error) {
     console.log("Error in signup", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 
@@ -60,14 +60,14 @@ const signIn = async (req, res) => {
     );
 
     if (!user || !isPasswordCorrect) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({success: false, message: "Invalid credentials" });
     }
 
     const token = generateTokenAndSetCookie(user._id, res);
-    res.status(200).json({ message: "User signed in successfully", token, user: { role: user.role }  });
+    res.status(200).json({success: true, message: "User signed in successfully", token, user  });
   } catch (error) {
     console.log("Error in login controller", error.message);
-    res.status(500).json({ error: "Internal Server Error. Please try again" });
+    res.status(500).json({success: false, error: "Internal Server Error. Please try again" });
   }
 };
 
@@ -75,11 +75,32 @@ const signIn = async (req, res) => {
 const signOut = async (req, res) => {
   try {
     res.cookie("jwt", "", { maxAge: 0 });
-    res.status(200).json({ message: "Logged out successfully" });
+    res.status(200).json({success: true, message: "Logged out successfully" });
   } catch (error) {
     console.log("Error in logout controller", error.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({success: false, error: "Internal Server Error" });
   }
 };
 
-export { signUp, signIn, signOut };
+//auth middleware
+const authMiddleware = async (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token)
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorised user!",
+    });
+
+  try {
+    const decoded = jwt.verify(token, "CLIENT_SECRET_KEY");
+    req.user = decoded;
+    next();
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      message: "Unauthorised user!",
+    });
+  }
+};
+
+export { signUp, signIn, signOut, authMiddleware };

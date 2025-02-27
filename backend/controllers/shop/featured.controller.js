@@ -5,7 +5,7 @@ const addFeaturedImage = async (req, res) => {
   try {
     const { image } = req.body;
     if (!image) {
-      return res.status(404).json({ message: "Image not provided" });
+      return res.status(404).json({success: false, message: "Image not provided" });
     }
     const featureImages = new Featured({
       image,
@@ -14,10 +14,10 @@ const addFeaturedImage = async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: "Image added successfully", featureImages });
+      .json({success: true, message: "Image added successfully", data: featureImages });
   } catch (error) {
     console.log("Error in uploading image", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 
@@ -26,12 +26,12 @@ const getFeaturedImage = async (req, res) => {
   try {
     const images = await Featured.find({});
     if (!images) {
-      return res.status(404).json({ message: "Images not available" });
+      return res.status(404).json({success: false, message: "Images not available" });
     }
-    return res.status(200).json({ images });
+    return res.status(200).json({success: true, data: images });
   } catch (error) {
     console.log("Error in getting featured images", error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: "Internal server error" });
   }
 };
 

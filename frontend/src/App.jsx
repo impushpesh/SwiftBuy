@@ -1,5 +1,10 @@
 import { Route,Routes  } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+
+// importing slice
+import {checkAuthStatus} from './store/authSlice/index'
 
 // Auth
 import Authlayout from "./components/auth/Authlayout";
@@ -29,9 +34,16 @@ import CheckAuth from "./components/common/check-auth";
 // Unauth page
 import UnauthPage from "./pages/unauth";
 
+
 function App() {
-  const isAuthenticated = false;
-  const user = null;
+  const { user, isAuthenticated, isLoading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(checkAuthStatus())
+  }, [dispatch])
+  
+
   return (
     <div className="flex flex-col overflow-hidden bg-white">
       <Routes>

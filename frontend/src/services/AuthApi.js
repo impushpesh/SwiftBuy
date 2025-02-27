@@ -27,13 +27,29 @@ export const signInUser = async (formData) => {
 };
 
 export const signOutUser = async () => {
-    try {
-        const response = await axios.post(`${API_URL}/signout`, {}, {
-            withCredentials: true, 
-        });
-        return response.data;
-    } catch (error) {
-        console.error("Error logging out user:", error.response?.data);
-        throw error.response?.data || { error: "Something went wrong" };
-    }
-  };
+  try {
+    const response = await axios.post(
+      `${API_URL}/signout`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error logging out user:", error.response?.data);
+    throw error.response?.data || { error: "Something went wrong" };
+  }
+};
+
+export const checkAuth = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/check-auth`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error checking auth:", error.response?.data);
+    throw error.response?.data || { error: "Something went wrong" };
+  }
+};
