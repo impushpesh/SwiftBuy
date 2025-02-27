@@ -14,34 +14,11 @@ const initialState = {
 function AuthLogin() {
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   function onSubmit(event) {
     event.preventDefault();
     dispatch(loginUser(formData))
-      .unwrap()
-      .then(() => {
-        if (user?.role === "admin") {
-          navigate("/admin/dashboard");
-        } else if (user?.role === "user") {
-          navigate("/shop/home");
-        }
-      })
-      .catch((error) => {
-        console.error("Login Error:", error);
-      });
   }
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      if (user?.role === "admin") {
-        navigate("/admin/dashboard");
-      } else if (user?.role === "user") {
-        navigate("/shop/home");
-      }
-    }
-  }, [isAuthenticated, user, navigate]);
 
   return (
     <div className="mx-auto w-full max-w-md space-y-6">

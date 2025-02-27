@@ -64,7 +64,7 @@ const signIn = async (req, res) => {
     }
 
     const token = generateTokenAndSetCookie(user._id, res);
-    res.status(200).json({success: true, message: "User signed in successfully", token, user  });
+    res.status(200).json({success: true, message: "User signed in successfully", token, data: user  });
   } catch (error) {
     console.log("Error in login controller", error.message);
     res.status(500).json({success: false, error: "Internal Server Error. Please try again" });
