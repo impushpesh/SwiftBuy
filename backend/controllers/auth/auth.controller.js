@@ -91,7 +91,7 @@ const signIn = async (req, res) => {
 // Logout
 const signOut = async (req, res) => {
   try {
-    res.cookie("jwt", "", { maxAge: 0 });
+    res.clearCookie("token");
     res.status(200).json({success: true, message: "Logged out successfully" });
   } catch (error) {
     console.log("Error in logout controller", error.message);

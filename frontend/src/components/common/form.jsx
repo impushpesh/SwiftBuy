@@ -42,7 +42,7 @@ function CommonForm({
                 [getControlItem.name]: event.target.value,
               })
             }
-            className="select select-bordered w-full"
+            className="select select-bordered w-full bg-white"
           >
             <option value="" disabled>
               {getControlItem.label}
@@ -70,7 +70,7 @@ function CommonForm({
                 [getControlItem.name]: event.target.value,
               })
             }
-            className="textarea textarea-bordered w-full "
+            className="textarea textarea-bordered w-full bg-white"
           />
         );
         break;

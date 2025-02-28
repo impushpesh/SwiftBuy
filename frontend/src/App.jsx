@@ -34,6 +34,9 @@ import CheckAuth from "./components/common/check-auth";
 // Unauth page
 import UnauthPage from "./pages/unauth";
 
+// Loading component
+import Loading from "./components/loading/loading";
+
 
 function App() {
   const { user, isAuthenticated, isLoading } = useSelector((state) => state.auth);
@@ -43,7 +46,9 @@ function App() {
     dispatch(checkAuthStatus())
   }, [dispatch])
   
-  if (isLoading) return <div>Loading....</div>
+  if (isLoading){
+    return <Loading />
+  }
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
