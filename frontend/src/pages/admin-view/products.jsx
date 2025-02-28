@@ -22,7 +22,7 @@ function AdminProducts() {
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-          <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4 bg-slate-50">
+          <div className="menu  text-base-content min-h-full w-80 p-4 bg-slate-50">
             <h2 className="text-xl text-black font-bold mb-4">Add New Product</h2>
             <ProductImageUpload />
             <CommonForm
