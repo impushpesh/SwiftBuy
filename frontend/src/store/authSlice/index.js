@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { signUpUser, signInUser, checkAuth, signOutUser } from "../../services/AuthApi";
+import {
+  signUpUser,
+  signInUser,
+  checkAuth,
+  signOutUser,
+} from "../../services/AuthApi";
 import { toast } from "react-hot-toast";
 
 const initialState = {
