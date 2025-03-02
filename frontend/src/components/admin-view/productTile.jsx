@@ -33,16 +33,18 @@ function AdminProductTile({
           )}
         </div>
         <div className="card-actions justify-between">
-          <button
-            className="btn btn-primary flex items-center gap-2"
-            onClick={() => {
-              setOpenCreateProductsDialog(true);
-              setCurrentEditedId(product?._id);
-              setFormData(product);
-            }}
-          >
-            <FaEdit /> Edit
-          </button>
+        <button
+          className="btn btn-primary flex items-center gap-2"
+          onClick={() => {
+            setOpenCreateProductsDialog(true);
+            setCurrentEditedId(product?._id);
+            setFormData(product);
+            document.getElementById("my-drawer-4").checked = true;
+          }}
+        >
+          <FaEdit /> Edit
+        </button>
+
           <button
             className="btn btn-error flex items-center gap-2"
             onClick={() => handleDelete(product?._id)}
