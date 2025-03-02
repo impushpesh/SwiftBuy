@@ -112,11 +112,10 @@ const editProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const findProduct = await Product.findById(id);
+    const findProduct = await Product.findByIdAndDelete(id);
     if (!findProduct) {
       return res.status(404).json({success: false, message: "Product not found" });
     }
-    await findProduct.remove();
     return res.status(200).json({success: true, message: "Product deleted successfully" });
   } catch (error) {
     console.log("Error in deleteProduct", error.message);
