@@ -7,7 +7,7 @@ export const signUpUser = async (formData) => {
     const response = await axios.post(`${API_URL}/signup`, formData, {
       withCredentials: true,
     });
-    return response;
+    return response.data;
   } catch (error) {
     console.error("Error signing up user:", error.response.data);
     throw error.response?.data || { error: "Something went wrong" };
@@ -19,7 +19,7 @@ export const signInUser = async (formData) => {
     const response = await axios.post(`${API_URL}/signin`, formData, {
       withCredentials: true,
     });
-    return response;
+    return response.data;
   } catch (error) {
     console.error("Error logging in user:", error.response?.data);
     throw error.response?.data || { error: "Something went wrong" };
@@ -35,7 +35,7 @@ export const signOutUser = async () => {
         withCredentials: true,
       }
     );
-    return response;
+    return response.data;
   } catch (error) {
     console.error("Error logging out user:", error.response?.data);
     throw error.response?.data || { error: "Something went wrong" };
@@ -51,7 +51,7 @@ export const checkAuth = async () => {
           "no-store, no-cache, must-revalidate, proxy-revalidate",
       },
     });
-    return response;
+    return response.data;
   } catch (error) {
     console.error("Error checking auth:", error.response?.data);
     throw error.response?.data || { error: "Something went wrong" };

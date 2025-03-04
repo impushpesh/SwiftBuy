@@ -19,7 +19,7 @@ export const registerUser = createAsyncThunk(
     try {
       const response = await signUpUser(formData);
       toast.success("Registration successful!");
-      return response.data;
+      return response;
     } catch (error) {
       toast.error(error.message || "Registration failed!");
       return rejectWithValue(error.message || "Registration failed!");
@@ -33,7 +33,7 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await signInUser(formData);
       toast.success("Login successful!");
-      return response.data;
+      return response;
     } catch (error) {
       toast.error(error.message || "Login failed!");
       return rejectWithValue(error.message || "Login failed!");
@@ -46,7 +46,7 @@ export const checkAuthStatus = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await checkAuth();
-      return response.data;
+      return response;
     } catch (error) {
       return rejectWithValue(error.message || "Error checking auth status");
     }
@@ -59,7 +59,7 @@ export const logoutUser = createAsyncThunk(
     try {
       const response = await signOutUser();
       toast.success("Logout successful!");
-      return response.data;
+      return response;
     } catch (error) {
       toast.error(error.message || "Logout failed!");
       return rejectWithValue(error.message || "Logout failed!");
@@ -95,6 +95,7 @@ const authSlice = createSlice({
       console.log(action);
 
       state.isLoading = false;
+      console.log(action.payload.data)
       state.user = action.payload.success ? action.payload.user : null;
       state.isAuthenticated = action.payload.success;
     });

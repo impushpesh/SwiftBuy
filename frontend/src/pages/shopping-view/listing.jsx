@@ -6,7 +6,7 @@ import { FaSort } from "react-icons/fa";
 
 import ProductFilter from "../../components/shopping-view/Filter";
 import ProductDetails from "../../components/shopping-view/ProductDetails";
-import ShoppingViewProductTile from "../../components/shopping-view/ProductTile";
+import ShoppingViewProductTile from "../../components/shopping-view/ProductTile.jsx";
 import { sortOptions } from "../../config/index.js";
 import { addCartItem, fetchCart } from "../../store/shopSlice/cartSlice/index.js";
 import { fetchAllFilteredProducts, fetchProductDetails } from "../../store/shopSlice/productSlice/index.js";
@@ -68,7 +68,7 @@ function ShoppingListing() {
   }
 
   function handleAddToCart(productId, totalStock) {
-    let getCartItems = cartItems.items || [];
+    let getCartItems = cartItems?.items || [];
     const existingItem = getCartItems.find((item) => item.productId === productId);
     if (existingItem && existingItem.quantity + 1 > totalStock) {
       toast.error(`Only ${existingItem.quantity} quantity can be added for this item`);
@@ -77,7 +77,6 @@ function ShoppingListing() {
     dispatch(addCartItem({ userId: user?.id, productId, quantity: 1 })).then((data) => {
       if (data?.payload?.success) {
         dispatch(fetchCart(user?.id));
-        toast.success("Product added to cart");
       }
     });
   }
@@ -113,7 +112,7 @@ function ShoppingListing() {
               key={product.id}
               handleGetProductDetails={handleGetProductDetails}
               product={product}
-              handleAddToCart={handleAddToCart}
+              handleAddtoCart={handleAddToCart}
             />
           )) : <p className="text-center text-gray-500">No products available</p>}
         </div>

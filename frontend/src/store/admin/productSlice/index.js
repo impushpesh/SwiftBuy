@@ -18,7 +18,7 @@ export const addNewProduct = createAsyncThunk(
     try {
       const response = await createProduct(formData);
       toast.success("Product added successfully!");
-      return response.data;
+      return response;
     } catch (error) {
       toast.error(error.message || "Product add failed!");
       return rejectWithValue(error.message || "Product add failed!");
@@ -31,7 +31,7 @@ export const fetchAllProducts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await getAllProducts();
-      return response?.data;
+      return response;
     } catch (error) {
       return rejectWithValue(error.message || "Error fetching products");
     }
@@ -44,7 +44,7 @@ export const updateProduct = createAsyncThunk(
     try {
       const response = await editProduct({ id, formData });
       toast.success("Product updated successfully!");
-      return response?.data;
+      return response;
     } catch (error) {
       toast.error(error.message || "Product update failed!");
       return rejectWithValue(error.message || "Product update failed!");
@@ -58,7 +58,7 @@ export const removeProduct = createAsyncThunk(
     try {
       const response = await deleteProduct(id);
       toast.success("Product removed successfully!");
-      return response?.data;
+      return response;
     } catch (error) {
       toast.error(error.message || "Product remove failed!");
       return rejectWithValue(error.message || "Product remove failed!");
@@ -75,6 +75,7 @@ const AdminProductsSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(fetchAllProducts.fulfilled, (state, action) => {
+      console.log("action.payload.data", action.payload.data);
       state.isLoading = false;
       state.productList = action.payload.data;
     });

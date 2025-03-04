@@ -8,7 +8,7 @@ import {
 import { toast } from "react-hot-toast";
 
 const initialState = {
-  cartItems: [],
+  cartItems: { items: [] },
   isLoading: false,
 };
 
@@ -18,7 +18,7 @@ export const addCartItem = createAsyncThunk(
     try {
       const response = await addToCart({ userId, productId, quantity });
       toast.success("Item added to cart successfully!");
-      return response.data;
+      return response;
     } catch (error) {
       toast.error(error.message || "Item add failed!");
       return rejectWithValue(error.message || "Item add failed!");
@@ -31,7 +31,7 @@ export const fetchCart = createAsyncThunk(
   async (userId, { rejectWithValue }) => {
     try {
       const response = await fetchCartItems(userId);
-      return response.data;
+      return response;
     } catch (error) {
       return rejectWithValue(error.message || "Failed to fetch cart items!");
     }
@@ -44,7 +44,7 @@ export const updateCart = createAsyncThunk(
     try {
       const response = await updateCartItemQty({ userId, productId, quantity });
       toast.success("Cart updated successfully!");
-      return response.data;
+      return response;
     } catch (error) {
       toast.error(error.message || "Cart update failed!");
       return rejectWithValue(error.message || "Cart update failed!");
@@ -58,7 +58,7 @@ export const deleteCart = createAsyncThunk(
     try {
       const response = await deleteCartItem({ userId, productId });
       toast.success("Item removed from cart successfully!");
-      return response.data;
+      return response;
     } catch (error) {
       toast.error(error.message || "Item remove failed!");
       return rejectWithValue(error.message || "Item remove failed!");

@@ -5,11 +5,9 @@ import { Review } from "../../models/review.model.js";
 // Add the review
 const addReview = async (req, res) => {
   try {
-    const { productId, userId, userName, reviewMessage, reviewValue } =
-      req.body;
-    if (!productId || !userId || !userName || !reviewMessage || !reviewValue) {
-      return res.status(400).json({success: false, message: "Please fill all fields" });
-    }
+    const { productId, userId, userName, reviewMessage, reviewValue } = req.body;
+      
+    
     const order = await Order.findOne({
       userId,
       "cartItems.productId": productId,

@@ -16,7 +16,7 @@ export const fetchProductDetails = createAsyncThunk(
   async (productId, { rejectWithValue }) => {
     try {
       const response = await getProductDetails(productId);
-      return response?.data;
+      return response;
     } catch (error) {
       toast.error(error.message || "Failed to fetch product details!");
       return rejectWithValue(
@@ -54,6 +54,7 @@ const shoppingProductSlice = createSlice({
     );
     builders.addCase(fetchProductDetails.fulfilled, (state, action)=>{
         state.isLoading = false;
+        console.log(action.payload.data);
         state.productDetails = action.payload.data;
         }
     );

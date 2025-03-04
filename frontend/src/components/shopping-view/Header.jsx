@@ -2,7 +2,6 @@ import { Link, useNavigate, useLocation, useSearchParams } from 'react-router-do
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { FaShoppingCart, FaUserCog, FaSignOutAlt, FaBars, FaHome } from 'react-icons/fa';
-import toast from 'react-hot-toast';
 import { shoppingViewHeaderMenuItems } from '../../config';
 import { logoutUser } from '../../store/authSlice';
 import CartWrapper from './CartWrapper';
@@ -69,7 +68,7 @@ function HeaderRightContent() {
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           {/* Page content here */}
-          <label htmlFor="my-drawer-4" className="drawer-button btn btn-outline"><FaShoppingCart className="w-5 h-5" /><span className="badge badge-secondary absolute top-0 right-0">{cartItems?.items?.length || 0}</span></label>
+          <label htmlFor="my-drawer-4" className="drawer-button btn btn-outline"><FaShoppingCart className="w-5 h-5" /><span className="badge badge-secondary absolute top-0 right-0">{cartItems?.length || 0}</span></label>
         </div>
         <div className="drawer-side z-50">
           <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>

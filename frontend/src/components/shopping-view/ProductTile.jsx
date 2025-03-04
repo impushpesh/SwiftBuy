@@ -1,11 +1,10 @@
 import { brandOptionsMap, categoryOptionsMap } from "../../config/index.js";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineError } from "react-icons/md";
-import { Badge, Button, Card } from "daisyui";
 
 function ShoppingViewProductTile({ product, handleGetProductDetails, handleAddtoCart }) {
   return (
-    <Card className="w-full max-w-sm mx-auto shadow-lg border border-gray-200">
+    <div className="card w-full max-w-sm mx-auto shadow-lg border border-gray-200">
       <div onClick={() => handleGetProductDetails(product?._id)} className="cursor-pointer">
         <div className="relative">
           <img
@@ -14,17 +13,17 @@ function ShoppingViewProductTile({ product, handleGetProductDetails, handleAddto
             className="w-full h-[300px] object-cover rounded-t-lg"
           />
           {product?.totalStock === 0 ? (
-            <Badge className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded-md">
+            <span className="badge absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded-md">
               Out Of Stock
-            </Badge>
+            </span>
           ) : product?.totalStock < 10 ? (
-            <Badge className="absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 rounded-md">
+            <span className="badge absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 rounded-md">
               {`Only ${product?.totalStock} left`}
-            </Badge>
+            </span>
           ) : product?.salePrice > 0 ? (
-            <Badge className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-md">
+            <span className="badge absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-md">
               Sale
-            </Badge>
+            </span>
           ) : null}
         </div>
         <div className="p-4">
@@ -47,20 +46,21 @@ function ShoppingViewProductTile({ product, handleGetProductDetails, handleAddto
       </div>
       <div className="p-4">
         {product?.totalStock === 0 ? (
-          <Button disabled className="w-full bg-gray-400 cursor-not-allowed flex items-center justify-center">
+          <button disabled className="btn w-full bg-gray-400 cursor-not-allowed flex items-center justify-center">
             <MdOutlineError className="mr-2" /> Out Of Stock
-          </Button>
+          </button>
         ) : (
-          <Button
+          <button
             onClick={() => handleAddtoCart(product?._id, product?.totalStock)}
-            className="w-full bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center"
+            className="btn w-full bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center"
           >
             <FaShoppingCart className="mr-2" /> Add to Cart
-          </Button>
+          </button>
         )}
       </div>
-    </Card>
+    </div>
   );
 }
+
 
 export default ShoppingViewProductTile;

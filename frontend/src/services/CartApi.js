@@ -11,19 +11,19 @@ export const addToCart = async ({ userId, productId, quantity }) => {
         withCredentials: true,
       }
     );
-    return response;
+    return response.data;
   } catch (error) {
     console.error("Error adding to cart:", error.response.data);
     throw error.response?.data || { error: "Something went wrong" };
   }
 };
 
-export const fetchCartItems = async()=>{
+export const fetchCartItems = async(userId)=>{
     try {
         const response = await axios.get(`${API_URL}/get/${userId}`, {
         withCredentials: true,
         });
-        return response;
+        return response.data;
     } catch (error) {
         console.error("Error fetching cart items:", error.response.data);
         throw error.response?.data || { error: "Something went wrong" };
@@ -39,7 +39,7 @@ export const updateCartItemQty = async ({ userId, productId, quantity }) => {
         withCredentials: true,
       }
     );
-    return response;
+    return response.data;
   } catch (error) {
     console.error("Error updating cart item quantity:", error.response.data);
     throw error.response?.data || { error: "Something went wrong" };
@@ -51,7 +51,7 @@ export const deleteCartItem = async ({ userId, productId }) => {
         const response = await axios.delete(`${API_URL}/${userId}/${productId}`, {
         withCredentials: true,
         });
-        return response;
+        return response.data;
     } catch (error) {
         console.error("Error deleting cart item:", error.response.data);
         throw error.response?.data || { error: "Something went wrong" };

@@ -7,15 +7,13 @@ function StarRating({ rating, handleRatingChange }) {
       {[1, 2, 3, 4, 5].map((star) => (
         <button
           key={star}
-          className={`btn btn-circle transition-colors ${
-            star <= rating
-              ? "text-yellow-500 bg-black hover:bg-yellow-600"
-              : "text-black bg-white hover:bg-primary hover:text-white"
-          }`}
           onClick={handleRatingChange ? () => handleRatingChange(star) : null}
+          className="transition transform hover:scale-125 duration-200 focus:outline-none"
         >
           <FaStar
-            className={`w-6 h-6 ${star <= rating ? "fill-yellow-500" : "fill-black"}`}
+            className={`w-6 h-6 ${
+              star <= rating ? "text-yellow-500" : "text-gray-300"
+            }`}
           />
         </button>
       ))}

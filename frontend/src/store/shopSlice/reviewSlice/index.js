@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-hot-toast";
 
 import { addReview, getProductReviews } from "../../../services/ReviewApi";
-import { toast } from "react-hot-toast";
 const initialState = {
   isLoading: false,
   reviews: [],
@@ -12,7 +12,7 @@ export const fetchProductReviews = createAsyncThunk(
   async (productId, { rejectWithValue }) => {
     try {
       const response = await getProductReviews(productId);
-      return response.data;
+      return response;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -24,8 +24,10 @@ export const addProductReview = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await addReview(formData);
-      return response.data;
+      toast.success("Review added");
+      return response;
     } catch (error) {
+      toast.error(error.message || "Can't add review");
       return rejectWithValue(error.response.data);
     }
   }
