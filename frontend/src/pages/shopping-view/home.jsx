@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
-// Import react-icons (you can adjust these icon choices as needed)
+// Import react-icons 
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { FaBaby } from "react-icons/fa";
 import { PiPantsLight } from "react-icons/pi";
