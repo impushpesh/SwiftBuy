@@ -88,7 +88,7 @@ const cartSlice = createSlice({
     });
     builders.addCase(fetchCart.fulfilled, (state, action)=>{
       state.isLoading = false;
-      state.cartItems = action.payload.data.items;
+      state.cartItems = action.payload.items;
     });
     builders.addCase(fetchCart.rejected, (state)=>{
       state.isLoading = false;
