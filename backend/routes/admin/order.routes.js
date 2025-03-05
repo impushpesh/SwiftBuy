@@ -1,5 +1,9 @@
-import express from 'express';
-import {getAllOrdersOfAllUsers, getOrderDetailsForAdmin, updateOrderStatus} from '../../controllers/admin/order.controller.js'
+import express from "express";
+import {
+  getAllOrdersOfAllUsers,
+  getOrderDetailsForAdmin,
+  updateOrderStatus,
+} from "../../controllers/shop/order.controller.js";
 
 const router = express.Router();
 
