@@ -14,7 +14,7 @@ function PaypalReturnPage() {
     if (paymentId && payerId) {
       const orderId = JSON.parse(sessionStorage.getItem("currentOrderId"));
       
-      dispatch(capturePayment({ paymentId, payerId, orderId })).then((data) => {
+      dispatch(captureOrderPayment({ paymentId, payerId, orderId })).then((data) => {
         if (data?.payload?.success) {
           sessionStorage.removeItem("currentOrderId");
           window.location.href = "/shop/payment-success";

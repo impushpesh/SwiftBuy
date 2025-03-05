@@ -1,9 +1,9 @@
-import React from 'react'
+import Orders from '../../components/admin-view/Order'
 
 function AdminOrders() {
   return (
     <div>
-      Admin Orders
+      <Orders/>
     </div>
   )
 }

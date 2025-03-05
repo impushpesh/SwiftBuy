@@ -22,7 +22,7 @@ const getOrderDetailsForAdmin = async (req, res) => {
     if (!order) {
       return res.status(404).json({success: false, message: "No order found" });
     }
-    return res.status(200).json({success: true, data: orders});
+    return res.status(200).json({success: true, data: order});
   } catch (error) {
     console.log("Error in getting order", error.message);
     return res.status(500).json({success: false, message: "Internal server error" });

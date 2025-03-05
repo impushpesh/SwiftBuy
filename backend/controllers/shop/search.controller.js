@@ -1,6 +1,6 @@
 import { Product } from "../../models/product.model.js";
 
-const searchProduct = async (requestAnimationFrame, res) => {
+const searchProduct = async (req, res) => {
   try {
     const { keyword } = req.params;
     if (!keyword || typeof keyword !== "string") {

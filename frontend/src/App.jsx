@@ -40,6 +40,7 @@ import UnauthPage from "./pages/unauth";
 
 // Loading component
 import Loading from "./components/loading/loading";
+import Search from "./pages/shopping-view/search";
 
 
 function App() {
@@ -90,6 +91,7 @@ function App() {
         <Route path="checkout" element={<ShoppingCheckout />} />
         <Route path="paypal-return" element={<PaypalReturnPage />} />
         <Route path="payment-success" element={<PaymentSuccessPage />} />
+        <Route path="search" element= {<Search/>} />
 
         </Route>
         {/* Page doesnt exist */}
