@@ -19,7 +19,7 @@ import shopAddressRoutes from "./routes/shop/address.routes.js";
 import shopSearchRoutes from "./routes/shop/search.routes.js";
 import shopReviewRouter from "./routes/shop/review.routes.js";
 import shopFeaturedRouter from "./routes/shop/featured.routes.js";
-import shopOrderRouter from "./routes/shop/order.routes.js";
+import shopOrderRouter from "./routes/shop/shopOrder.routes.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;

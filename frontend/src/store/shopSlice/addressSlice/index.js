@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  fetchAddress,
+  fetchAddresses,
   updateAddress,
   addAddress,
   removeAddress,
@@ -31,7 +31,7 @@ export const fetchAllAddresses = createAsyncThunk(
   "/addresses/fetchAllAddresses",
   async (userId, { rejectWithValue }) => {
     try {
-      const response = await fetchAddress(userId);
+      const response = await fetchAddresses(userId);
       return response;
     } catch (error) {
       toast.error("Failed to fetch addresses");

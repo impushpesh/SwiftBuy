@@ -3,7 +3,7 @@ import {
   getAllOrdersOfAllUsers,
   getOrderDetailsForAdmin,
   updateOrderStatus,
-} from "../../controllers/shop/order.controller.js";
+} from "../../controllers/admin/order.controller.js";
 
 const router = express.Router();
 

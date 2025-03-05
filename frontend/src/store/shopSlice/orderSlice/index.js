@@ -40,7 +40,7 @@ export const captureOrderPayment = createAsyncThunk(
   }
 );
 
-export const fetchAllOrders = createAsyncThunk(
+export const fetchAllOrdersByUser = createAsyncThunk(
   "order/fetchAllOrders",
   async (userId, { rejectWithValue }) => {
     try {
@@ -91,25 +91,25 @@ const shoppingOrderSlice = createSlice({
         state.approvalURL = null;
         state.orderId = null;
       })
-      .addCase(getAllOrdersByUserId.pending, (state) => {
+      .addCase(fetchAllOrdersByUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAllOrdersByUserId.fulfilled, (state, action) => {
+      .addCase(fetchAllOrdersByUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.orderList = action.payload.data;
       })
-      .addCase(getAllOrdersByUserId.rejected, (state) => {
+      .addCase(fetchAllOrdersByUser.rejected, (state) => {
         state.isLoading = false;
         state.orderList = [];
       })
-      .addCase(getOrderDetails.pending, (state) => {
+      .addCase(fetchOrderDetails.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getOrderDetails.fulfilled, (state, action) => {
+      .addCase(fetchOrderDetails.fulfilled, (state, action) => {
         state.isLoading = false;
         state.orderDetails = action.payload.data;
       })
-      .addCase(getOrderDetails.rejected, (state) => {
+      .addCase(fetchOrderDetails.rejected, (state) => {
         state.isLoading = false;
         state.orderDetails = null;
       });
