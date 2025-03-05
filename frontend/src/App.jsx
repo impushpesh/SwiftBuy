@@ -25,6 +25,10 @@ import ShoppingListing from "./pages/shopping-view/listing";
 import ShoppingAccount from "./pages/shopping-view/account";
 import ShoppingCheckout from "./pages/shopping-view/checkout";
 
+// Payment
+import PaypalReturnPage from "./pages/shopping-view/paymentreturn";
+import PaymentSuccessPage from "./pages/shopping-view/paymentsuccess";
+
 //Page doesnt exist
 import NotFound from "./pages/404";
 
@@ -84,6 +88,8 @@ function App() {
         <Route path="listing" element={<ShoppingListing />} />
         <Route path="account" element={<ShoppingAccount />} />
         <Route path="checkout" element={<ShoppingCheckout />} />
+        <Route path="paypal-return" element={<PaypalReturnPage />} />
+        <Route path="payment-success" element={<PaymentSuccessPage />} />
 
         </Route>
         {/* Page doesnt exist */}
