@@ -9,16 +9,17 @@ import { Navigate } from "react-router-dom";
 import { FaPaypal } from "react-icons/fa";
 
 function ShoppingCheckout() {
-  const { cartItems } = useSelector((state) => state.shopCart);
+  const cartItems = useSelector((state) => state.shopCart.cartItems);
   const { user } = useSelector((state) => state.auth);
   const { approvalURL } = useSelector((state) => state.shopOrder);
   const [currentSelectedAddress, setCurrentSelectedAddress] = useState(null);
   const [isPaymentStart, setIsPaymentStart] = useState(false);
   const dispatch = useDispatch();
+  console.log("Cart Items:", cartItems);
 
   const totalCartAmount =
-    cartItems?.items?.length > 0
-      ? cartItems.items.reduce(
+      cartItems?.length > 0
+      ? cartItems.reduce(
           (sum, item) =>
             sum + (item?.salePrice > 0 ? item?.salePrice : item?.price) * item?.quantity,
           0
@@ -26,7 +27,7 @@ function ShoppingCheckout() {
       : 0;
 
   function handleInitiatePaypalPayment() {
-    if (!cartItems?.items?.length) {
+    if (!cartItems?.length) {
       toast.error("Your cart is empty. Please add items to proceed.");
       return;
     }
@@ -38,7 +39,7 @@ function ShoppingCheckout() {
     const orderData = {
       userId: user?.id,
       cartId: cartItems?._id,
-      cartItems: cartItems.items.map((item) => ({
+      cartItems: cartItems.map((item) => ({
         productId: item?.productId,
         title: item?.title,
         image: item?.image,
@@ -87,8 +88,8 @@ function ShoppingCheckout() {
           setCurrentSelectedAddress={setCurrentSelectedAddress}
         />
         <div className="flex flex-col gap-4">
-          {cartItems?.items?.length > 0 &&
-            cartItems.items.map((item) => <CartItems key={item.productId} cartItem={item} />)}
+          {cartItems?.length > 0  &&
+            cartItems.map((item) => <CartItems key={item.productId} cartItem={item} />)}
           <div className="mt-8 space-y-4">
             <div className="flex justify-between">
               <span className="font-bold">Total</span>

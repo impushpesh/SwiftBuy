@@ -14,7 +14,7 @@ function AddressCard({
           ? () => setCurrentSelectedAddress(addressInfo)
           : null
       }
-      className={`card border cursor-pointer shadow-md p-4 transition-all duration-200 ${
+      className={`card border cursor-pointer shadow-md p-4 transition-all duration-200 bg-green-500 text-black ${
         selectedId?._id === addressInfo?._id
           ? "border-red-900 border-4"
           : "border-gray-300"

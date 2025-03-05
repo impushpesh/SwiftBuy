@@ -18,7 +18,6 @@ export const addNewAddress = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await addAddress(formData);
-      toast.success("Address added successfully");
       return response;
     } catch (error) {
       toast.error("Failed to add address");
@@ -45,7 +44,6 @@ export const editaAddress = createAsyncThunk(
   async ({ userId, addressId, formData }, { rejectWithValue }) => {
     try {
       const response = await updateAddress(userId, addressId, formData);
-      toast.success("Address updated successfully");
       return response;
     } catch (error) {
       toast.error("Failed to update address");
@@ -59,7 +57,6 @@ export const deleteAddress = createAsyncThunk(
   async ({ userId, addressId }, { rejectWithValue }) => {
     try {
       const response = await removeAddress(userId, addressId);
-      toast.success("Address deleted successfully");
       return response;
     } catch (error) {
       toast.error("Failed to delete address");

@@ -74,7 +74,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
   }, [dispatch]);
 
   return (
-    <div className="p-5 bg-base-100 shadow-lg rounded-lg">
+    <div className="p-5  shadow-lg rounded-lg">
       <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
         {addressList && addressList.length > 0
           ? addressList.map((singleAddressItem) => (
@@ -89,7 +89,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
             ))
           : <p className="text-center text-gray-500">No addresses available</p>}
       </div>
-      <div className="p-4 border rounded-lg shadow-md bg-base-200">
+      <div className="p-4 border rounded-lg shadow-md bg-white">
         <h2 className="text-lg font-semibold flex items-center gap-2">
           <MdLocationOn className="text-primary" />
           {currentEditedId !== null ? 'Edit Address' : 'Add New Address'}
