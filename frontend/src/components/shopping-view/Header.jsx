@@ -74,7 +74,7 @@ function HeaderRightContent() {
           <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
           <ul className="menu bg-white text-black min-h-full w-80 p-4">
             {/* Sidebar content here */}
-            <CartWrapper setOpenCartSheet={setOpenCartDrawer} cartItems={cartItems?.items || []} />
+            <CartWrapper setOpenCartSheet={setOpenCartDrawer} cartItems={cartItems} />
           </ul>
         </div>
       </div>

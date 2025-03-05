@@ -8,7 +8,7 @@ import {
 import { toast } from "react-hot-toast";
 
 const initialState = {
-  cartItems: { items: [] },
+  cartItems: [],
   isLoading: false,
 };
 
@@ -43,7 +43,7 @@ export const updateCart = createAsyncThunk(
   async ({ userId, productId, quantity }, { rejectWithValue }) => {
     try {
       const response = await updateCartItemQty({ userId, productId, quantity });
-      toast.success("Cart updated successfully!");
+      toast.success("Cart updated");
       return response;
     } catch (error) {
       toast.error(error.message || "Cart update failed!");
@@ -57,7 +57,7 @@ export const deleteCart = createAsyncThunk(
   async ({ userId, productId }, { rejectWithValue }) => {
     try {
       const response = await deleteCartItem({ userId, productId });
-      toast.success("Item removed from cart successfully!");
+      toast.success("Item removed");
       return response;
     } catch (error) {
       toast.error(error.message || "Item remove failed!");
@@ -76,7 +76,7 @@ const cartSlice = createSlice({
     });
     builders.addCase(addCartItem.fulfilled, (state, action)=>{
       state.isLoading = false;
-      state.cartItems = action.payload.data;
+      state.cartItems = action.payload.data.items;
     });
     builders.addCase(addCartItem.rejected, (state)=>{
       state.isLoading = false;
@@ -88,7 +88,7 @@ const cartSlice = createSlice({
     });
     builders.addCase(fetchCart.fulfilled, (state, action)=>{
       state.isLoading = false;
-      state.cartItems = action.payload.data;
+      state.cartItems = action.payload.data.items;
     });
     builders.addCase(fetchCart.rejected, (state)=>{
       state.isLoading = false;
@@ -100,7 +100,7 @@ const cartSlice = createSlice({
     });
     builders.addCase(updateCart.fulfilled, (state, action)=>{
       state.isLoading = false;
-      state.cartItems = action.payload.data;
+      state.cartItems = action.payload.data.items;
     });
     builders.addCase(updateCart.rejected, (state)=>{
       state.isLoading = false;
@@ -112,7 +112,7 @@ const cartSlice = createSlice({
     });
     builders.addCase(deleteCart.fulfilled, (state, action)=>{
       state.isLoading = false;
-      state.cartItems = action.payload.data;
+      state.cartItems = action.payload.data.items;
     });
     builders.addCase(deleteCart.rejected, (state)=>{
       state.isLoading = false;

@@ -39,7 +39,7 @@ function CartItems({ cartItem }) {
       })
     ).then((data) => {
       if (data?.payload?.success) {
-        toast.success("Cart item updated successfully");
+        console.log("Cart updated successfully");
       }
     });
   }
@@ -47,7 +47,7 @@ function CartItems({ cartItem }) {
   function handleCartItemDelete(getCartItem) {
     dispatch(deleteCart({ userId: user?.id, productId: getCartItem?.productId })).then((data) => {
       if (data?.payload?.success) {
-        toast.success("Cart item deleted successfully");
+        console.log("Item removed from cart successfully");
       }
     });
   }
