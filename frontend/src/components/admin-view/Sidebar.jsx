@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiGrid, FiBox, FiShoppingBag, FiCheckCircle, FiMenu } from "react-icons/fi";
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const adminSidebarMenuItems = [
   {
@@ -41,6 +42,24 @@ function MenuItems({ setOpen }) {
           <span className="text-lg transition-colors">{menuItem.label}</span>
         </div>
       ))}
+     <div className="flex items-center justify-center gap-6 mt-4 text-gray-500">
+        <a
+          href="https://github.com/impushpesh/SwiftBuy.git"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link link-hover text-2xl"
+        >
+          <FaGithub />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/pushpeshpant"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link link-hover text-2xl"
+        >
+          <FaLinkedin />
+        </a>
+      </div>
     </nav>
   );
 }

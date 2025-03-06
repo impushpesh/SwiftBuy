@@ -7,6 +7,7 @@ import { logoutUser, resetTokenAndCredentials } from '../../store/authSlice';
 import CartWrapper from './CartWrapper';
 import { fetchCart } from '../../store/shopSlice/cartSlice';
 import Logo from "../../assets/Logo.png";
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 function MenuItems({ onMenuItemClick }) {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ function MenuItems({ onMenuItemClick }) {
   }
 
   return (
-    <nav className="flex flex-col lg:flex-row gap-4 text-black">
+    <nav className="flex flex-col lg:flex-row items-center gap-4 text-black">
       {shoppingViewHeaderMenuItems.map((menuItem) => (
         <span
           onClick={() => handleNavigate(menuItem)}
@@ -45,7 +46,26 @@ function MenuItems({ onMenuItemClick }) {
           {menuItem.label}
         </span>
       ))}
+      <div className="flex items-center gap-2">
+        <a
+          href="https://www.linkedin.com/in/pushpeshpant"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link link-hover text-xl"
+        >
+          <FaLinkedin />
+        </a>
+        <a
+          href="https://github.com/impushpesh/SwiftBuy.git"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link link-hover text-xl"
+        >
+          <FaGithub />
+        </a>
+      </div>
     </nav>
+
   );
 }
 
