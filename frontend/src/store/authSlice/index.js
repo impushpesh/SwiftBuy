@@ -46,7 +46,11 @@ export const checkAuthStatus = createAsyncThunk(
   "auth/checkauth",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await checkAuth();
+      const token = JSON.parse(sessionStorage.getItem('token'));
+      if (!token) {
+        return rejectWithValue("No token found");
+      }
+      const response = await checkAuth(token);
       return response;
     } catch (error) {
       return rejectWithValue(error.message || "Error checking auth status");
