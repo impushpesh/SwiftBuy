@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/admin/order";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/admin/order`;
 
 export const getAllOrdersOfAllUsers = async () => {
   try {

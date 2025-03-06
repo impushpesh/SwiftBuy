@@ -2,6 +2,9 @@ import paypal from "../../helpers/paypal.js";
 import { Order } from "../../models/order.model.js";
 import { Cart } from "../../models/cart.model.js";
 import { Product } from "../../models/product.model.js";
+import { config } from "dotenv";
+
+config();
 
 const createOrder = async (req, res) => {
   try {
@@ -26,8 +29,8 @@ const createOrder = async (req, res) => {
         payment_method: "paypal",
       },
       redirect_urls: {
-        return_url: "http://localhost:5173/shop/paypal-return",
-        cancel_url: "http://localhost:5173/shop/paypal-cancel",
+        return_url: `${process.env.CLIENT_BASE_URL}/shop/paypal-return`,
+        cancel_url: `${process.env.CLIENT_BASE_URL}/shop/paypal-cancel`,
       },
       transactions: [
         {
