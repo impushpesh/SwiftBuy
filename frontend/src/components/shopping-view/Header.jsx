@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { FaShoppingCart, FaUserCog, FaSignOutAlt, FaBars } from 'react-icons/fa';
 import { shoppingViewHeaderMenuItems } from '../../config';
-import { logoutUser } from '../../store/authSlice';
+import { logoutUser, resetTokenAndCredentials } from '../../store/authSlice';
 import CartWrapper from './CartWrapper';
 import { fetchCart } from '../../store/shopSlice/cartSlice';
 import Logo from "../../assets/Logo.png";
@@ -56,7 +56,10 @@ function HeaderRightContent({ cartDrawerId = "cart-drawer" }) {
   const navigate = useNavigate();
 
   function handleLogout() {
-    dispatch(logoutUser());
+    // dispatch(logoutUser());
+    dispatch(resetTokenAndCredentials());
+    sessionStorage.clear();
+    navigate("/auth/login");
   }
 
   useEffect(() => {

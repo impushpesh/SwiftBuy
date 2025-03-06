@@ -71,9 +71,21 @@ const signIn = async (req, res) => {
     process.env.JWT_SECRET,
     { expiresIn: "1d"}
     )
-    res.cookie("token", token, { httpOnly: true, secure: false }).json({
+    // res.cookie("token", token, { httpOnly: true, secure: true }).json({
+    //   success: true,
+    //   message: "Logged in successfully",
+    //   user: {
+    //     id: user._id,
+    //     email: user.email,
+    //     username: user.username,
+    //     role: user.role,
+    //   }
+    // })
+
+    res.status(200).json({
       success: true,
       message: "Logged in successfully",
+      token,
       user: {
         id: user._id,
         email: user.email,
@@ -100,7 +112,8 @@ const signOut = async (req, res) => {
 
 //auth middleware
 const authMiddleware = async (req, res, next) => {
-  const token = req.cookies.token;
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
   if (!token)
     return res.status(401).json({
       success: false,

@@ -1,14 +1,19 @@
 import { FiLogOut } from "react-icons/fi";
 import { FaAlignJustify } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../../store/authSlice/index";
+import { logoutUser, resetTokenAndCredentials } from "../../store/authSlice/index";
 import Logo from "../../assets/Logo.png";
+import { useNavigate } from "react-router-dom";
 
 function AdminHeader({ setOpen }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleLogout() {
-    dispatch(logoutUser());
+    // dispatch(logoutUser());
+    dispatch(resetTokenAndCredentials());
+    sessionStorage.clear();
+    navigate("/auth/login");
   }
 
   return (

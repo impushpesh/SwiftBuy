@@ -47,7 +47,8 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    dispatch(checkAuthStatus())
+    const token = JSON.parse(sessionStorage.getItem('token'))
+    dispatch(checkAuthStatus(token))
   }, [dispatch])
   
   if (isLoading){

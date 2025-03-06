@@ -42,11 +42,12 @@ export const signOutUser = async () => {
   }
 };
 
-export const checkAuth = async () => {
+export const checkAuth = async (token) => {
   try {
     const response = await axios.get(`${API_URL}/check-auth`, {
       withCredentials: true,
       headers: {
+        Authorization: `Bearer ${token}`,
         "Cache-Control":
           "no-store, no-cache, must-revalidate, proxy-revalidate",
       },
