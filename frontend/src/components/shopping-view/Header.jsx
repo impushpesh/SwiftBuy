@@ -96,7 +96,7 @@ function HeaderRightContent({ cartDrawerId = "cart-drawer" }) {
         <div className="drawer-content">
           <label htmlFor={cartDrawerId} className="btn btn-outline">
             <FaShoppingCart className="w-5 h-5 text-black" />
-            <span className="badge badge-secondary absolute top-0 right-0">
+            <span className="absolute top-0 right-0 px-2 py-1 text-white text-sm font-semibold bg-green-500 rounded-full">
               {cartItems?.length || 0}
             </span>
           </label>
