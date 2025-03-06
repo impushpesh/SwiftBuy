@@ -16,7 +16,7 @@ function ShoppingAccount() {
       
       {/* Tabs Section */}
       <div className="container mx-auto grid grid-cols-1 gap-8 py-8">
-        <div className="flex flex-col rounded-lg border bg-base-100 p-6 shadow-lg">
+        <div className="flex flex-col rounded-lg border bg-white p-6 shadow-lg">
           <Tabs>
             <TabList className="flex space-x-4 border-b pb-2">
               <Tab className="px-4 py-2 rounded-md cursor-pointer hover:bg-primary hover:text-white flex items-center space-x-2">

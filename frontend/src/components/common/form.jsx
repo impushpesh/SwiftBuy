@@ -26,7 +26,7 @@ function CommonForm({
                 [getControlItem.name]: event.target.value,
               })
             }
-            className="input input-bordered w-full bg-white"
+            className="input input-bordered w-full bg-white text-black"
           />
         );
         break;
@@ -42,7 +42,7 @@ function CommonForm({
                 [getControlItem.name]: event.target.value,
               })
             }
-            className="select select-bordered w-full bg-white"
+            className="select select-bordered w-full bg-white text-black"
           >
             <option value="" disabled>
               {getControlItem.label}
@@ -70,7 +70,7 @@ function CommonForm({
                 [getControlItem.name]: event.target.value,
               })
             }
-            className="textarea textarea-bordered w-full bg-white"
+            className="textarea textarea-bordered w-full bg-white text-black"
           />
         );
         break;
@@ -89,7 +89,7 @@ function CommonForm({
                 [getControlItem.name]: event.target.value,
               })
             }
-            className="input input-bordered w-full"
+            className="input input-bordered w-full text-black"
           />
         );
         break;
@@ -110,7 +110,7 @@ function CommonForm({
           </div>
         ))}
       </div>
-      <button type="submit" className="btn btn-primary mt-2 w-full">
+      <button type="submit" className="btn btn-success mt-2 w-full">
         {buttonText || "Submit"}
       </button>
     </form>

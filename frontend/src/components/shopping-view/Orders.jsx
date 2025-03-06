@@ -27,18 +27,18 @@ function ShoppingOrders() {
   }, [orderDetails]);
 
   return (
-    <div className="card bg-base-100 shadow-xl p-4">
+    <div className="card bg-white shadow-xl p-4 ">
       <div className="card-body">
-        <h2 className="card-title text-lg font-bold">Order History</h2>
+        <h2 className="card-title text-lg font-bold text-black">Order History</h2>
         <div className="overflow-x-auto">
-          <table className="table table-zebra w-full">
+          <table className="table table-zebra w-full text-black">
             <thead>
               <tr>
-                <th>Order ID</th>
-                <th>Order Date</th>
-                <th>Order Status</th>
-                <th>Order Price</th>
-                <th>Details</th>
+                <th className= "text-black">Order ID</th>
+                <th className= "text-black">Order Date</th>
+                <th className= "text-black">Order Status</th>
+                <th className= "text-black">Order Price</th>
+                <th className= "text-black">Details</th>
               </tr>
             </thead>
             <tbody>
@@ -85,7 +85,7 @@ function ShoppingOrders() {
 
       {openDetailsDialog && (
         <div className="modal modal-open">
-          <div className="modal-box">
+          <div className="modal-box bg-white">
             <ShoppingOrderDetailsView orderDetails={orderDetails} />
             <div className="modal-action">
               <button

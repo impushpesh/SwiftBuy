@@ -28,7 +28,7 @@ function ProductFilter({ filters, handleFilter }) {
                 ))}
               </div>
             </div>
-            <div className="divider"></div> {/* DaisyUI Divider */}
+            <div className="divider"></div>
           </Fragment>
         ))}
       </div>

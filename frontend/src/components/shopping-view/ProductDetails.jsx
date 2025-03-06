@@ -42,7 +42,6 @@ function ProductDetails({ open, setOpen, productDetails }) {
       (data) => {
         if (data?.payload?.success) {
           dispatch(fetchCart(user?.id));
-          toast.success("Product added to cart!");
         }
       }
     );
@@ -73,7 +72,6 @@ function ProductDetails({ open, setOpen, productDetails }) {
         setRating(0);
         setReviewMsg("");
         dispatch(fetchProductReviews(productDetails?._id));
-        toast.success("Review added successfully!");
       }
     });
   };
@@ -166,9 +164,10 @@ function ProductDetails({ open, setOpen, productDetails }) {
                     >
                       <div className="avatar">
                         <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-lg font-bold text-gray-700">
-                          {review.userName[0].toUpperCase()}
+                          {(review.userName?.[0]?.toUpperCase() || review.userId?.[0]?.toUpperCase() || "?")}
                         </div>
                       </div>
+
                       <div>
                         <h3 className="font-semibold text-gray-800">
                           {review.userName}

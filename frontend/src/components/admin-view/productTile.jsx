@@ -8,7 +8,7 @@ function AdminProductTile({
   handleDelete,
 }) {
   return (
-    <div className="card w-full max-w-sm bg-base-100 shadow-xl mx-auto">
+    <div className="card w-full max-w-sm bg-white shadow-2xl mx-auto">
       <figure>
         <img
           src={product?.image}
@@ -17,7 +17,7 @@ function AdminProductTile({
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title text-xl font-bold">{product?.title}</h2>
+        <h2 className="card-title text-xl text-black font-bold">{product?.title}</h2>
         <div className="flex justify-between items-center mb-2">
           <span
             className={`${

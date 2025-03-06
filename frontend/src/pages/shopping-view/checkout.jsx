@@ -100,7 +100,7 @@ function ShoppingCheckout() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
           {/* Address Section */}
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Delivery Address</h2>
+            <h2 className="text-2xl text-black font-semibold mb-4">Delivery Address</h2>
             <div className="bg-white p-6 rounded-lg shadow">
               <Address
                 selectedId={currentSelectedAddress}
@@ -111,7 +111,7 @@ function ShoppingCheckout() {
 
           {/* Cart Section */}
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
+            <h2 className="text-2xl text-black font-semibold mb-4">Your Cart</h2>
             <div className="bg-white p-6 rounded-lg shadow space-y-6">
               {cartItems?.length > 0 ? (
                 cartItems.map((item) => (

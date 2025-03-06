@@ -14,29 +14,41 @@ function AddressCard({
           ? () => setCurrentSelectedAddress(addressInfo)
           : null
       }
-      className={`card border cursor-pointer shadow-md p-4 transition-all duration-200 bg-green-500 text-black ${
+      className={`cursor-pointer border transition-all duration-200 bg-white text-gray-800 shadow-md rounded-lg p-6 mb-4 hover:shadow-xl ${
         selectedId?._id === addressInfo?._id
-          ? "border-red-900 border-4"
-          : "border-gray-300"
+          ? "border-blue-500"
+          : "border-gray-200"
       }`}
     >
-      <div className="card-body">
-        <p className="text-lg font-semibold">Address: {addressInfo?.address}</p>
-        <p>City: {addressInfo?.city}</p>
-        <p>Pincode: {addressInfo?.pincode}</p>
-        <p>Phone: {addressInfo?.phone}</p>
-        <p>Notes: {addressInfo?.notes}</p>
+      <div className="space-y-2">
+        <p className="text-lg font-semibold">
+          Address: <span className="font-normal">{addressInfo?.address}</span>
+        </p>
+        <p>
+          City: <span className="font-normal">{addressInfo?.city}</span>
+        </p>
+        <p>
+          Pincode: <span className="font-normal">{addressInfo?.pincode}</span>
+        </p>
+        <p>
+          Phone: <span className="font-normal">{addressInfo?.phone}</span>
+        </p>
+        {addressInfo?.notes && (
+          <p className="italic">
+            Notes: <span className="font-normal">{addressInfo?.notes}</span>
+          </p>
+        )}
       </div>
-      <div className="card-actions flex justify-between p-3">
+      <div className="flex justify-end space-x-4 mt-4">
         <button 
           onClick={() => handleEditAddress(addressInfo)} 
-          className="btn btn-primary flex items-center gap-2"
+          className="btn btn-primary btn-sm flex items-center gap-1"
         >
           <FaEdit /> Edit
         </button>
         <button 
           onClick={() => handleDeleteAddress(addressInfo)} 
-          className="btn btn-error flex items-center gap-2"
+          className="btn btn-error btn-sm flex items-center gap-1"
         >
           <FaTrash /> Delete
         </button>
