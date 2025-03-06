@@ -117,22 +117,23 @@ function ShoppingHome() {
       
 
       {/* Feature Image Slider */}
-      <div className="relative w-full h-[600px] overflow-hidden">
+      <div className="relative w-full h-[600px] min-h-[300px] overflow-hidden">
         {featureImageList && featureImageList.length > 0 ? (
           featureImageList.map((slide, index) => (
             <img
               key={index}
               src={slide?.image}
               alt={`slide-${index}`}
-              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              className={`absolute top-0 left-0 w-full h-full object-contain md:object-cover transition-opacity duration-1000 ${
                 index === currentSlide ? "opacity-100" : "opacity-0"
               }`}
             />
           ))
         ) : (
-          <img src={banner1} alt="banner" className="w-full h-full object-cover" />
+          <img src={banner1} alt="banner" className="w-full h-full object-contain md:object-cover" />
         )}
 
+        {/* Left Button */}
         <button
           onClick={() =>
             setCurrentSlide(
@@ -145,6 +146,8 @@ function ShoppingHome() {
         >
           <FiChevronLeft size={20} />
         </button>
+
+        {/* Right Button */}
         <button
           onClick={() =>
             setCurrentSlide(
@@ -156,6 +159,7 @@ function ShoppingHome() {
           <FiChevronRight size={20} />
         </button>
       </div>
+
 
       {/* Shop by Category */}
       <section className="py-12 bg-gray-50">
